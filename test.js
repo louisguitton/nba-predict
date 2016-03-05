@@ -2,9 +2,8 @@
 var mongoose = require('mongoose');
 
 //connecting local mongodb database named test
-var db = mongoose.connect('mongodb://admin:root@ds051575.mlab.com:51575/nba-lgu');
-
-
+// var db = mongoose.connect('mongodb://louis:admin@ds051575.mlab.com:51575/nba-lgu');
+var db = mongoose.connect('mongodb://localhost/nba');
 
 //testing connectivity
 mongoose.connection.once('connected', function() {
@@ -36,19 +35,19 @@ function convertOdd(us_odd){
 	}
 }
 
-
 var query = {$or:[{odd_home :{$lt:-50}},{odd_away :{$gt:50}}]};
-// var query2 = {odd_winner : {$or:[{$lt:-50},{$gt:50}]}}
 
-
-result = Game.find(query, function(err, games){
+Game.find(query, function(err, games){
 	if (err) return (err);
-	for each game in games
-
-})
-
-// I just want to connect to my mongodb/nba/games collection
-// then withdraw all games that have US odds (so the query or query2)
-// then apply convertOdd to them
-// then store them again
-// just to FREECKING clean up my DB !!!!
+	// console.log(games)
+	for (var idx in games){
+		var game = games[idx];
+		game.odd_home = convertOdd(game.odd_home);
+		game.odd_away = convertOdd(game.odd_away);
+		console.log(game.odd_home);
+		game.save(function (err) {
+			if (err) return handleError(err);
+		}
+	);
+}
+});
