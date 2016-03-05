@@ -21,11 +21,14 @@ var gameSchema = new Schema({
 	score_away : Number,
 	odd_home : Number,
 	overtime : Boolean,
-	score_home : Number
+	score_home : Number,
+	rest_days_home : Number,
+	rest_days_away : Number,
 });
-
 // Creating the model
 var Game = mongoose.model('games', gameSchema);
+
+
 
 function convertOdd(us_odd){
 	if (us_odd>=0){
@@ -35,19 +38,34 @@ function convertOdd(us_odd){
 	}
 }
 
-var query = {$or:[{odd_home :{$lt:-50}},{odd_away :{$gt:50}}]};
+var cleanUpOdds = function(){
+	var query = {$or:[{odd_home :{$lt:-50}},{odd_away :{$gt:50}}]};
 
-Game.find(query, function(err, games){
-	if (err) return (err);
-	// console.log(games)
-	for (var idx in games){
-		var game = games[idx];
-		game.odd_home = convertOdd(game.odd_home);
-		game.odd_away = convertOdd(game.odd_away);
-		console.log(game.odd_home);
-		game.save(function (err) {
-			if (err) return handleError(err);
-		}
-	);
-}
+	Game.find(query, function(err, games){
+		if (err) return (err);
+		// console.log(games)
+		for (var idx in games){
+			var game = games[idx];
+			game.odd_home = convertOdd(game.odd_home);
+			game.odd_away = convertOdd(game.odd_away);
+			console.log(game.odd_home);
+			game.save(function (err) {
+				if (err) return handleError(err);
+			}
+		);
+	}
 });
+}
+cleanUpOdds();
+
+var restDays = function(){
+
+	Game.find().sort({date_time:-1}).exec(function(err,games){
+		if (err) return (err);
+		// console.log(games)
+		for (var idx =0;games.length-32;idx++){
+
+		}
+	});
+};
+restDays();

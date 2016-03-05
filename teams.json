@@ -1,0 +1,150 @@
+[{
+  "name" : "Boston Celtics",
+  "conference" : "eastern",
+  "division" : "atlantic"
+},
+{
+  "name" : "Brooklyn Nets",
+  "conference" : "eastern",
+  "division" : "atlantic"
+},
+{
+  "name" : "New York Knicks",
+  "conference" : "eastern",
+  "division" : "atlantic"
+},
+{
+  "name" : "Philadelphia Sixers",
+  "conference" : "eastern",
+  "division" : "atlantic"
+},
+{
+  "name" : "Toronto Raptors",
+  "conference" : "eastern",
+  "division" : "atlantic"
+},
+{
+  "name" : "Chicago Bulls",
+  "conference" : "eastern",
+  "division" : "central"
+},
+{
+  "name" : "Cleveland Cavaliers",
+  "conference" : "eastern",
+  "division" : "central"
+},
+{
+  "name" : "Detroit Pistons",
+  "conference" : "eastern",
+  "division" : "central"
+},
+{
+  "name" : "Indiana Pacers",
+  "conference" : "eastern",
+  "division" : "central"
+},
+{
+  "name" : "Milwaukee Bucks",
+  "conference" : "eastern",
+  "division" : "central"
+},
+{
+  "name" : "Atlanta Hawks",
+  "conference" : "eastern",
+  "division" : "southeast"
+},
+{
+  "name" : "Charlotte Hornets",
+  "conference" : "eastern",
+  "division" : "southeast"
+},
+{
+  "name" : "Miami Heat",
+  "conference" : "eastern",
+  "division" : "southeast"
+},
+{
+  "name" : "Orlando Magic",
+  "conference" : "eastern",
+  "division" : "southeast"
+},
+{
+  "name" : "Washington Wizards",
+  "conference" : "eastern",
+  "division" : "southeast"
+},
+{
+  "name" : "Denver Nuggets",
+  "conference" : "western",
+  "division" : "northwest"
+},
+{
+  "name" : "Minnesota Timberwolwes",
+  "conference" : "western",
+  "division" : "northwest"
+},
+{
+  "name" : "Oklahoma City Thunder",
+  "conference" : "western",
+  "division" : "northwest"
+},
+{
+  "name" : "Portland Trail Blazers",
+  "conference" : "western",
+  "division" : "northwest"
+},
+{
+  "name" : "Utah Jazz",
+  "conference" : "western",
+  "division" : "northwest"
+},
+{
+  "name" : "Golden State Warriors",
+  "conference" : "western",
+  "division" : "pacific"
+},
+{
+  "name" : "Los Angeles Clippers",
+  "conference" : "western",
+  "division" : "pacific"
+},
+{
+  "name" : "Los Angeles Lakers",
+  "conference" : "western",
+  "division" : "pacific"
+},
+{
+  "name" : "Phoenix Suns",
+  "conference" : "western",
+  "division" : "pacific"
+},
+{
+  "name" : "Sacramento Kings",
+  "conference" : "western",
+  "division" : "pacific"
+},
+{
+  "name" : "Houston Rockets",
+  "conference" : "western",
+  "division" : "southwest"
+},
+{
+  "name" : "Memphis Grizzlies",
+  "conference" : "western",
+  "division" : "southwest"
+},
+{
+  "name" : "Dallas Mavericks",
+  "conference" : "western",
+  "division" : "southwest"
+},
+{
+  "name" : "New Orleans Pelicans",
+  "conference" : "western",
+  "division" : "southwest"
+},
+{
+  "name" : "San Antonio Spurs",
+  "conference" : "western",
+  "division" : "southwest"
+}]
