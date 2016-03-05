@@ -28,3 +28,5 @@ for (var t in teams){
     if (err) return handleError(err);
   });
 }
+
+module.exports = Team;

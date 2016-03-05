@@ -22,8 +22,8 @@ var gameSchema = new Schema({
 	odd_home : Number,
 	overtime : Boolean,
 	score_home : Number,
-	rest_days_home : Number,
-	rest_days_away : Number,
+	rest_time_home : Date,
+	rest_time_away : Date,
 });
 // Creating the model
 var Game = mongoose.model('games', gameSchema);
@@ -58,14 +58,31 @@ var cleanUpOdds = function(){
 }
 cleanUpOdds();
 
+var teams = require('./teams.json');
 var restDays = function(){
-
-	Game.find().sort({date_time:-1}).exec(function(err,games){
-		if (err) return (err);
-		// console.log(games)
-		for (var idx =0;games.length-32;idx++){
-
-		}
-	});
+	for (var t in teams){
+		var team = teams[t];
+		// var query = {$or:[{home_team : team.name },{away_team : team.name}]};
+		// I SHOULD USE query because I want to compute the time between 2 any games of a given team.
+		// but even with the simplification below, I can't make it work
+		Game.find({home_team : team.name }).sort({date_time:-1}).exec(function(err,gamesOfTeam){
+			if (err) return (err);
+			// console.log(gamesOfTeam)
+			for(var idx=0;i=gamesOfTeam.length-2;i++){
+				console.log(gamesOfTeam[idx])
+				gamesOfTeam[idx].rest_time_home = gamesOfTeam[idx].date_time-gamesOfTeam[idx+1].date_time;
+				// gamesOfTeam[idx].save();
+			}
+		});
+		Game.find({away_team : team.name}).sort({date_time:-1}).exec(function(err,gamesOfTeam){
+			if (err) return (err);
+			// console.log(gamesOfTeam)
+			for(var idx=0;i=gamesOfTeam.length-2;i++){
+				gamesOfTeam[idx].rest_time_away = gamesOfTeam[idx].date_time-gamesOfTeam[idx+1].date_time;
+				// gamesOfTeam[idx].save();
+			}
+		});
+	}
 };
+
 restDays();
