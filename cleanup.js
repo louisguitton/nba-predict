@@ -8,6 +8,9 @@ var db = mongoose.connect('mongodb://localhost/nba');
 //testing connectivity
 mongoose.connection.once('connected', function() {
 	console.log("Database connected successfully")
+	cleanUpOdds();
+	console.log("Odds clean...")
+	restDays();
 });
 
 // Defining the schema
@@ -39,7 +42,7 @@ function convertOdd(us_odd){
 }
 
 var cleanUpOdds = function(){
-	var query = {$or:[{odd_home :{$lt:-50}},{odd_away :{$gt:50}}]};
+	var query = {$or:[{odd_home :{$lt:-50}},{odd_home :{$gt:50}},{odd_away :{$gt:50}},{odd_away :{$lt:-50}}]};
 
 	Game.find(query, function(err, games){
 		if (err) return (err);
@@ -51,38 +54,36 @@ var cleanUpOdds = function(){
 			console.log(game.odd_home);
 			game.save(function (err) {
 				if (err) return handleError(err);
-			}
-		);
-	}
-});
+			});
+		}
+	});
 }
-cleanUpOdds();
 
 var teams = require('./teams.json');
 var restDays = function(){
 	for (var t in teams){
-		var team = teams[t];
-		// var query = {$or:[{home_team : team.name },{away_team : team.name}]};
-		// I SHOULD USE query because I want to compute the time between 2 any games of a given team.
-		// but even with the simplification below, I can't make it work
-		Game.find({home_team : team.name }).sort({date_time:-1}).exec(function(err,gamesOfTeam){
-			if (err) return (err);
-			// console.log(gamesOfTeam)
-			for(var idx=0;i=gamesOfTeam.length-2;i++){
-				console.log(gamesOfTeam[idx])
-				gamesOfTeam[idx].rest_time_home = gamesOfTeam[idx].date_time-gamesOfTeam[idx+1].date_time;
-				// gamesOfTeam[idx].save();
+		var name = teams[t].name;
+		console.log(name)
+		var query = {$or:[{home_team : name },{away_team : name}]};
+		var games = Game.find(query).sort({date_time:-1});
+		games.select('home_team away_team date_time');
+		games.exec(function(err,gamesOfTeam){
+			if (err) return handleError(err);
+			console.log(gamesOfTeam[0]);
+			for(var i=0;i<gamesOfTeam.length-1;i++){
+				// console.log("gamesOfTeam[i]: " + gamesOfTeam[i])
+				var delta = gamesOfTeam[i].date_time-gamesOfTeam[i+1].date_time;
+				if(gamesOfTeam[i].home_team==name){
+					gamesOfTeam[i].rest_time_home = delta;
+					gamesOfTeam[i].save();
+				} else if (gamesOfTeam[i].away_team==name) {
+					gamesOfTeam[i].rest_time_away = delta;
+					gamesOfTeam[i].save();
+				}
+				// console.log(gamesOfTeam[i].rest_time_home);
 			}
-		});
-		Game.find({away_team : team.name}).sort({date_time:-1}).exec(function(err,gamesOfTeam){
-			if (err) return (err);
-			// console.log(gamesOfTeam)
-			for(var idx=0;i=gamesOfTeam.length-2;i++){
-				gamesOfTeam[idx].rest_time_away = gamesOfTeam[idx].date_time-gamesOfTeam[idx+1].date_time;
-				// gamesOfTeam[idx].save();
-			}
-		});
+		})
 	}
-};
+}
 
-restDays();
+// can't fucking save rest_time_away
