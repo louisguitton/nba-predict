@@ -59,7 +59,7 @@ var cleanUpOdds = function(){
 	});
 }
 
-var teams = require('./teams.json');
+var teams = require('./data/teams.json');
 var restDays = function(){
 	for (var t in teams){
 		var name = teams[t].name;

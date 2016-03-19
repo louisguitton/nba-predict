@@ -33,3 +33,6 @@ thanks to the stats after the game, you can update your ELO-based model.
 
 nba MONGODB: user=admin pwd=root
 Admoin UI = mongo-express -a
+
+
+refactor cleanup.js into models/game + cleanup_games.js + generate_rest_feature.js
