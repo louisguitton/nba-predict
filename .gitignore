@@ -1,2 +1,3 @@
 crawler/nba_odds/settings.py
 *.pyc
+data/games_mongodump.csv

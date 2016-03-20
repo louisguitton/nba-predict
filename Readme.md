@@ -36,3 +36,6 @@ Admoin UI = mongo-express -a
 
 
 refactor cleanup.js into models/game + cleanup_games.js + generate_rest_feature.js
+
+pourquoi pas utiliser une chaine de markov pour prédire la prochaine win?
+les etats sont les places au classement: on prend une équipe et on regarde quelles est la proba pour cette equipe de rester à ce classement ou bien de bouger
