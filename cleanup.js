@@ -1,5 +1,6 @@
 //This code requires mongoose node module
 var mongoose = require('mongoose');
+var Game = require('./models/Game')
 
 //connecting local mongodb database named test
 // var db = mongoose.connect('mongodb://louis:admin@ds051575.mlab.com:51575/nba-lgu');
@@ -12,25 +13,6 @@ mongoose.connection.once('connected', function() {
 	console.log("Odds clean...")
 	restDays();
 });
-
-// Defining the schema
-var Schema = mongoose.Schema;
-var gameSchema = new Schema({
-	_id : Schema.Types.ObjectId,
-	date_time : Date,
-	home_team : String,
-	away_team : String,
-	odd_away : Number,
-	score_away : Number,
-	odd_home : Number,
-	overtime : Boolean,
-	score_home : Number,
-	rest_time_home : Date,
-	rest_time_away : Date,
-});
-// Creating the model
-var Game = mongoose.model('games', gameSchema);
-
 
 
 function convertOdd(us_odd){
