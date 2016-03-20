@@ -77,7 +77,7 @@ rank in division
 - offensive rebound percentage
 
 ## Ideas
-There`s a difference between the data you can get after the game (the 4 factors),
+There's a difference between the data you can get after the game (the 4 factors),
 and the data you have before the game.
 thanks to the stats after the game, you can update your ELO-based model.
 
