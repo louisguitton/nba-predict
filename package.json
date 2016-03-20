@@ -1,0 +1,28 @@
+{
+    "name": "nba-predict",
+    "version": "1.0",
+    "description": "An app to predict the winner of the next NBA game",
+    "author": "Louis Guitton <louisguitton93@gmail.com>",
+    "scripts": {
+
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/louisguitton/nba-predict"
+    },
+    "bugs": {
+        "url": "https://github.com/louisguitton/nba-predict/issues"
+    },
+    "dependencies": {
+        "mongoose": "~3.8.1"
+    },
+    "engines": {
+        "node": "0.12.2"
+    },
+    "keywords": [
+        "node",
+        "nba"
+    ],
+    "private": true,
+    "licence": "MIT"
+}
