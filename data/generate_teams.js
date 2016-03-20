@@ -20,7 +20,7 @@ var teamSchema = new Schema({
 });
 var Team = mongoose.model('teams',teamSchema);
 
-var teams = require('./data/teams.json');
+var teams = require('teams.json');
 for (var t in teams){
   var team = new Team(teams[t]);
   console.log(team);
