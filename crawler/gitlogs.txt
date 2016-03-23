@@ -1,6 +1,0 @@
-0000000000000000000000000000000000000000 09a1e3988d26fad8bfe643e3a253ca051527c07d louisguitton <louisguitton93@gmail.com> 1453804423 +0100	commit (initial): scrapy + mongoDB
-09a1e3988d26fad8bfe643e3a253ca051527c07d ff41a54d7ecfa501cd5d0f818148f3a3479a3cd6 louisguitton <louisguitton93@gmail.com> 1453804609 +0100	commit: delete html
-ff41a54d7ecfa501cd5d0f818148f3a3479a3cd6 fb373f898262c84b01305f47c0980bab2134b4ee louisguitton <louisguitton93@gmail.com> 1453818527 +0100	commit: with clean dates
-fb373f898262c84b01305f47c0980bab2134b4ee f6732d7e65b753ab43181c5cca9bbc67e52fed2e louisguitton <louisguitton93@gmail.com> 1453819524 +0100	commit: add possibility for remote mondolab Db
-f6732d7e65b753ab43181c5cca9bbc67e52fed2e 2803359650b61434d40f959769e13fec12011f7a louisguitton <louisguitton93@gmail.com> 1454433226 +0100	commit: before changing anything
-2803359650b61434d40f959769e13fec12011f7a 40c5c17928bd3e2e128c47d98fb1e05dc4759228 louisguitton <louisguitton93@gmail.com> 1454435099 +0100	commit: with home and away

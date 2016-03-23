@@ -1,8 +1,0 @@
-date_time
-home_team
-away_team
-odd_home
-odd_away
-score_home
-score_away
-overtime
