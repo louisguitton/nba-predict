@@ -6541,10 +6541,12 @@ AElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[436]:</div>
+<div class="prompt input_prompt">In&nbsp;[447]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="k">def</span> <span class="nf">odds_feature_mapping</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="s1">&#39;odd_away&#39;</span><span class="p">]</span><span class="o">-</span><span class="n">X</span><span class="p">[</span><span class="s1">&#39;odd_home&#39;</span><span class="p">])</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">x0</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;difference_odds&#39;</span><span class="p">})</span>
     <span class="n">x1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">X</span><span class="p">[</span><span class="s1">&#39;odd_home&#39;</span><span class="p">])</span>
     <span class="n">x1</span> <span class="o">=</span> <span class="n">x1</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;odd_home&#39;</span><span class="p">:</span><span class="s1">&#39;inverse_odd_home&#39;</span><span class="p">})</span>
     <span class="n">x2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">X</span><span class="p">[</span><span class="s1">&#39;odd_away&#39;</span><span class="p">])</span>
@@ -6555,8 +6557,9 @@ AElFTkSuQmCC
     <span class="n">x4</span> <span class="o">=</span> <span class="n">x4</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;odd_home&#39;</span><span class="p">:</span><span class="s1">&#39;square_odd_home&#39;</span><span class="p">})</span>
     <span class="n">x5</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="s1">&#39;odd_home&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="s1">&#39;odd_away&#39;</span><span class="p">])</span>
     <span class="n">x5</span> <span class="o">=</span> <span class="n">x5</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;product_odds&#39;</span><span class="p">})</span>
-    <span class="n">X_mapped</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X</span><span class="p">,</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">x4</span><span class="p">,</span><span class="n">x3</span><span class="p">,</span><span class="n">x5</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">feature_scale</span><span class="p">(</span><span class="n">X_mapped</span><span class="p">,[</span><span class="s1">&#39;odd_home&#39;</span><span class="p">,</span><span class="s1">&#39;odd_away&#39;</span><span class="p">,</span><span class="s1">&#39;inverse_odd_home&#39;</span><span class="p">,</span><span class="s1">&#39;inverse_odd_away&#39;</span><span class="p">,</span><span class="s1">&#39;square_odd_home&#39;</span><span class="p">,</span><span class="s1">&#39;square_odd_away&#39;</span><span class="p">,</span><span class="s1">&#39;product_odds&#39;</span><span class="p">]);</span>
+    <span class="n">X_mapped</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X</span><span class="p">,</span><span class="n">x0</span><span class="p">,</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">x4</span><span class="p">,</span><span class="n">x3</span><span class="p">,</span><span class="n">x5</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">feature_scale</span><span class="p">(</span><span class="n">X_mapped</span><span class="p">,[</span><span class="s1">&#39;odd_home&#39;</span><span class="p">,</span><span class="s1">&#39;odd_away&#39;</span><span class="p">,</span><span class="s1">&#39;difference_odds&#39;</span><span class="p">,</span><span class="s1">&#39;inverse_odd_home&#39;</span><span class="p">,</span>
+                            <span class="s1">&#39;inverse_odd_away&#39;</span><span class="p">,</span><span class="s1">&#39;square_odd_home&#39;</span><span class="p">,</span><span class="s1">&#39;square_odd_away&#39;</span><span class="p">,</span><span class="s1">&#39;product_odds&#39;</span><span class="p">]);</span>
     <span class="k">return</span> <span class="n">X_mapped</span>
 </pre></div>
 
@@ -6567,7 +6570,7 @@ AElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[430]:</div>
+<div class="prompt input_prompt">In&nbsp;[448]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">X_train_map</span> <span class="o">=</span> <span class="n">odds_feature_mapping</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
@@ -6580,7 +6583,7 @@ AElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[431]:</div>
+<div class="prompt input_prompt">In&nbsp;[449]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">X_train_map</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -6594,7 +6597,7 @@ AElFTkSuQmCC
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[431]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[449]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -6611,6 +6614,7 @@ AElFTkSuQmCC
       <th>score_away</th>
       <th>overtime</th>
       <th>home_wins</th>
+      <th>difference_odds</th>
       <th>inverse_odd_home</th>
       <th>inverse_odd_away</th>
       <th>square_odd_home</th>
@@ -6630,6 +6634,7 @@ AElFTkSuQmCC
       <td>129</td>
       <td>True</td>
       <td>True</td>
+      <td>-0.044089</td>
       <td>0.005692</td>
       <td>0.001308</td>
       <td>-0.004849</td>
@@ -6647,6 +6652,7 @@ AElFTkSuQmCC
       <td>106</td>
       <td>True</td>
       <td>True</td>
+      <td>0.072630</td>
       <td>-0.001683</td>
       <td>0.001546</td>
       <td>-0.002912</td>
@@ -6664,6 +6670,7 @@ AElFTkSuQmCC
       <td>103</td>
       <td>False</td>
       <td>False</td>
+      <td>0.010435</td>
       <td>-0.002608</td>
       <td>0.000433</td>
       <td>-0.004109</td>
@@ -6681,6 +6688,7 @@ AElFTkSuQmCC
       <td>100</td>
       <td>False</td>
       <td>True</td>
+      <td>0.144483</td>
       <td>-0.001485</td>
       <td>0.001489</td>
       <td>-0.002390</td>
@@ -6698,6 +6706,7 @@ AElFTkSuQmCC
       <td>104</td>
       <td>False</td>
       <td>True</td>
+      <td>-0.042089</td>
       <td>0.006903</td>
       <td>0.001306</td>
       <td>-0.004953</td>
@@ -6752,10 +6761,12 @@ AElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[441]:</div>
+<div class="prompt input_prompt">In&nbsp;[454]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="n">X</span> <span class="o">=</span> <span class="n">X_train_map</span><span class="p">[[</span><span class="s1">&#39;odd_home&#39;</span><span class="p">,</span><span class="s1">&#39;odd_away&#39;</span><span class="p">,</span><span class="s1">&#39;inverse_odd_home&#39;</span><span class="p">,</span><span class="s1">&#39;inverse_odd_away&#39;</span><span class="p">,</span><span class="s1">&#39;square_odd_home&#39;</span><span class="p">,</span><span class="s1">&#39;square_odd_away&#39;</span><span class="p">,</span><span class="s1">&#39;product_odds&#39;</span><span class="p">]]</span>
+<div class=" highlight hl-ipython2"><pre><span class="n">fit_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;odd_home&#39;</span><span class="p">,</span><span class="s1">&#39;odd_away&#39;</span><span class="p">,</span><span class="s1">&#39;difference_odds&#39;</span><span class="p">,</span><span class="s1">&#39;inverse_odd_home&#39;</span><span class="p">,</span><span class="s1">&#39;inverse_odd_away&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;square_odd_home&#39;</span><span class="p">,</span><span class="s1">&#39;square_odd_away&#39;</span><span class="p">,</span><span class="s1">&#39;product_odds&#39;</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X_train_map</span><span class="p">[</span><span class="n">fit_features</span><span class="p">]</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">X_train_map</span><span class="p">[</span><span class="s1">&#39;home_wins&#39;</span><span class="p">]</span>
 <span class="n">classifier</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span> <span class="p">,</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
@@ -6768,7 +6779,7 @@ AElFTkSuQmCC
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[441]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[454]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -6786,7 +6797,7 @@ AElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[442]:</div>
+<div class="prompt input_prompt">In&nbsp;[455]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">classifier</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
@@ -6800,11 +6811,11 @@ AElFTkSuQmCC
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[442]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[455]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.68811285050748328</pre>
+<pre>0.68725270944434891</pre>
 </div>
 
 </div>
@@ -6922,7 +6933,7 @@ AElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[437]:</div>
+<div class="prompt input_prompt">In&nbsp;[452]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">X_test_map</span> <span class="o">=</span> <span class="n">odds_feature_mapping</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
@@ -6935,7 +6946,7 @@ AElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[438]:</div>
+<div class="prompt input_prompt">In&nbsp;[453]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">X_test_map</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -6949,7 +6960,7 @@ AElFTkSuQmCC
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[438]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[453]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -6966,6 +6977,7 @@ AElFTkSuQmCC
       <th>score_away</th>
       <th>overtime</th>
       <th>home_wins</th>
+      <th>difference_odds</th>
       <th>inverse_odd_home</th>
       <th>inverse_odd_away</th>
       <th>square_odd_home</th>
@@ -6985,6 +6997,7 @@ AElFTkSuQmCC
       <td>92</td>
       <td>False</td>
       <td>False</td>
+      <td>-0.043710</td>
       <td>-0.085763</td>
       <td>0.086568</td>
       <td>-0.006404</td>
@@ -7002,6 +7015,7 @@ AElFTkSuQmCC
       <td>102</td>
       <td>False</td>
       <td>False</td>
+      <td>-0.065617</td>
       <td>-0.187955</td>
       <td>0.186310</td>
       <td>0.003736</td>
@@ -7019,6 +7033,7 @@ AElFTkSuQmCC
       <td>124</td>
       <td>False</td>
       <td>False</td>
+      <td>0.366406</td>
       <td>0.372612</td>
       <td>-0.371429</td>
       <td>-0.021904</td>
@@ -7036,6 +7051,7 @@ AElFTkSuQmCC
       <td>76</td>
       <td>False</td>
       <td>True</td>
+      <td>-0.078459</td>
       <td>-0.242852</td>
       <td>0.242042</td>
       <td>0.012206</td>
@@ -7053,6 +7069,7 @@ AElFTkSuQmCC
       <td>98</td>
       <td>False</td>
       <td>True</td>
+      <td>-0.042099</td>
       <td>-0.082338</td>
       <td>0.076258</td>
       <td>-0.006659</td>
@@ -7072,10 +7089,10 @@ AElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[439]:</div>
+<div class="prompt input_prompt">In&nbsp;[456]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="n">X</span> <span class="o">=</span> <span class="n">X_test_map</span><span class="p">[[</span><span class="s1">&#39;odd_home&#39;</span><span class="p">,</span><span class="s1">&#39;odd_away&#39;</span><span class="p">,</span><span class="s1">&#39;inverse_odd_home&#39;</span><span class="p">,</span><span class="s1">&#39;inverse_odd_away&#39;</span><span class="p">,</span><span class="s1">&#39;square_odd_home&#39;</span><span class="p">,</span><span class="s1">&#39;square_odd_away&#39;</span><span class="p">,</span><span class="s1">&#39;product_odds&#39;</span><span class="p">]]</span>
+<div class=" highlight hl-ipython2"><pre><span class="n">X</span> <span class="o">=</span> <span class="n">X_test_map</span><span class="p">[</span><span class="n">fit_features</span><span class="p">]</span>
 <span class="n">classifier</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 </pre></div>
 
@@ -7087,7 +7104,7 @@ AElFTkSuQmCC
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[439]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[456]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -7102,10 +7119,10 @@ AElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[443]:</div>
+<div class="prompt input_prompt">In&nbsp;[457]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="n">X</span> <span class="o">=</span> <span class="n">X_test_map</span><span class="p">[[</span><span class="s1">&#39;odd_home&#39;</span><span class="p">,</span><span class="s1">&#39;odd_away&#39;</span><span class="p">,</span><span class="s1">&#39;inverse_odd_home&#39;</span><span class="p">,</span><span class="s1">&#39;inverse_odd_away&#39;</span><span class="p">,</span><span class="s1">&#39;square_odd_home&#39;</span><span class="p">,</span><span class="s1">&#39;square_odd_away&#39;</span><span class="p">,</span><span class="s1">&#39;product_odds&#39;</span><span class="p">]]</span>
+<div class=" highlight hl-ipython2"><pre><span class="n">X</span> <span class="o">=</span> <span class="n">X_test_map</span><span class="p">[</span><span class="n">fit_features</span><span class="p">]</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">X_test_map</span><span class="p">[</span><span class="s1">&#39;home_wins&#39;</span><span class="p">]</span>
 <span class="n">classifier</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
@@ -7118,11 +7135,11 @@ AElFTkSuQmCC
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[443]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[457]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.69891609795262943</pre>
+<pre>0.69931754315535932</pre>
 </div>
 
 </div>
@@ -7130,6 +7147,953 @@ AElFTkSuQmCC
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Même après le feature mapping, on plafonne toujours à 70%</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Random-Forest">Random Forest<a class="anchor-link" href="#Random-Forest">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[458]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[459]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">classifier</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[464]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">fit_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;odd_home&#39;</span><span class="p">,</span><span class="s1">&#39;odd_away&#39;</span><span class="p">,</span><span class="s1">&#39;difference_odds&#39;</span><span class="p">,</span><span class="s1">&#39;inverse_odd_home&#39;</span><span class="p">,</span><span class="s1">&#39;inverse_odd_away&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;square_odd_home&#39;</span><span class="p">,</span><span class="s1">&#39;square_odd_away&#39;</span><span class="p">,</span><span class="s1">&#39;product_odds&#39;</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X_train_map</span><span class="p">[</span><span class="n">fit_features</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">X_train_map</span><span class="p">[</span><span class="s1">&#39;home_wins&#39;</span><span class="p">]</span>
+<span class="n">classifier</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span> <span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[464]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>RandomForestClassifier(bootstrap=True, class_weight=None, criterion=&apos;gini&apos;,
+            max_depth=None, max_features=&apos;auto&apos;, max_leaf_nodes=None,
+            min_samples_leaf=1, min_samples_split=2,
+            min_weight_fraction_leaf=0.0, n_estimators=10, n_jobs=1,
+            oob_score=False, random_state=None, verbose=0,
+            warm_start=False)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[465]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">X</span> <span class="o">=</span> <span class="n">X_test_map</span><span class="p">[</span><span class="n">fit_features</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">X_test_map</span><span class="p">[</span><span class="s1">&#39;home_wins&#39;</span><span class="p">]</span>
+<span class="n">classifier</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[465]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.55038137294259337</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Les résultats d'une random forest sont encore pires</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="SVM">SVM<a class="anchor-link" href="#SVM">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[466]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[481]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">classifier</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[482]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">X</span> <span class="o">=</span> <span class="n">X_train_map</span><span class="p">[</span><span class="n">fit_features</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">X_train_map</span><span class="p">[</span><span class="s1">&#39;home_wins&#39;</span><span class="p">]</span>
+<span class="n">classifier</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span> <span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[482]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma=&apos;auto&apos;, kernel=&apos;rbf&apos;,
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[483]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">X</span> <span class="o">=</span> <span class="n">X_test_map</span><span class="p">[</span><span class="n">fit_features</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">X_test_map</span><span class="p">[</span><span class="s1">&#39;home_wins&#39;</span><span class="p">]</span>
+<span class="n">classifier</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[483]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.65274989963869934</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The SVM with radial basis function kernel performs less good than SVM with linear</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Regularization">Regularization<a class="anchor-link" href="#Regularization">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[500]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">lambada</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">lambada</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">lambada</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">lambada</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">lambada</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[500]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[0.01, 0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 1.28, 2.56, 5.12, 10.24]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[501]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">lambada</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lambada</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[502]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">C</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">lambada</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[503]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">C</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[503]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([  1.00000000e+02,   5.00000000e+01,   2.50000000e+01,
+         1.25000000e+01,   6.25000000e+00,   3.12500000e+00,
+         1.56250000e+00,   7.81250000e-01,   3.90625000e-01,
+         1.95312500e-01,   9.76562500e-02])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[506]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">scores</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">):</span>
+    <span class="n">classifier</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">X_train_map</span><span class="p">[</span><span class="n">fit_features</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">X_train_map</span><span class="p">[</span><span class="s1">&#39;home_wins&#39;</span><span class="p">]</span>
+    <span class="n">classifier</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span> <span class="p">,</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">X_test_map</span><span class="p">[</span><span class="n">fit_features</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">X_test_map</span><span class="p">[</span><span class="s1">&#39;home_wins&#39;</span><span class="p">]</span>
+    <span class="n">scores</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[507]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">scores</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[507]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([ 0.69530309,  0.6989161 ,  0.7025291 ,  0.70212766,  0.703332  ,
+        0.70413489,  0.69851465,  0.69931754,  0.69971899,  0.70212766,
+        0.69690887])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[508]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">lambada</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[508]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.32000000000000001</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[509]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">C</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[509]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>3.125</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Even if we didn't use a cross validation set to fit the regularization parameter, we get that C=3.125 gives better results</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Plot-the-learning-curves">Plot the learning curves<a class="anchor-link" href="#Plot-the-learning-curves">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[543]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">sklearn.learning_curve</span> <span class="kn">import</span> <span class="n">learning_curve</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[544]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">classifier</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">3.125</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X_train_map</span><span class="p">[</span><span class="n">fit_features</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">X_train_map</span><span class="p">[</span><span class="s1">&#39;home_wins&#39;</span><span class="p">]</span>
+<span class="n">train_sizes_abs</span><span class="p">,</span> <span class="n">train_scores</span><span class="p">,</span> <span class="n">test_scores</span> <span class="o">=</span> <span class="n">learning_curve</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[545]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">train_sizes_abs</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[545]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([ 290,  944, 1598, 2252, 2906])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[535]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">train_scores</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[535]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[ 0.68275862,  0.66206897],
+       [ 0.70233051,  0.67266949],
+       [ 0.7008761 ,  0.68585732],
+       [ 0.69715808,  0.68250444],
+       [ 0.6982106 ,  0.68169305]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[536]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">test_scores</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[536]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[ 0.68455452,  0.67309016],
+       [ 0.68558652,  0.68134893],
+       [ 0.68455452,  0.6871989 ],
+       [ 0.6879945 ,  0.6916724 ],
+       [ 0.68489852,  0.68995182]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[537]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">train_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">train_scores</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">test_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">test_scores</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">train_scores</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[537]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([ 0.67241379,  0.6875    ,  0.69336671,  0.68983126,  0.68995182])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[539]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">train_sizes_abs</span><span class="p">,</span><span class="n">train_scores</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=.</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">train_sizes_abs</span><span class="p">,</span><span class="n">test_scores</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=.</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;train_sizes&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;scores&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">remove_border</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[541]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">X_train_map</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[541]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(5813, 15)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[542]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">X_test_map</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[542]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(2491, 15)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For the high bias case, we find both cross validation and training error are high</p>
+<p>For high variance, we find the cross validation error is high but training error is low</p>
+<p>Here, it seems to be a high bias problem: the generalization is good but the training scores are not good.</p>
+<p>I know 3 ways to fix high bias:</p>
+<ul>
+<li>lower lambda, so increase C (but we already fitted C)</li>
+<li>do feature mapping to add polynomial features (already done)</li>
+<li>add more features</li>
+</ul>
+<p>So I decide to <strong>focus on feature engineering</strong>.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
