@@ -42,6 +42,12 @@ Key findings:
 - winner and looser odds are following a log-normal distribution
 - more interesting to use (home, away) rather than (winner, looser)
 - the simple classifier "lowest odds wins" as a 70% accuracy
+- plot the games on (x,y)=(odd_home,odd_away)
+- performed feature scaling
+- performed feature mapping (square odds, inverse odds, product of odds, difference of odds)
+- trained logistic regression, random forest, SVM with different kernels.
+- regularized logistic regression
+- plot learning curves
 
 ## Cleanup and Feature Engineering
 ```bash
@@ -49,37 +55,38 @@ node cleanup.js
 ```
 
 ## DB Schemas
-Game Collection
----------------
-Home team
-Away team
-overtime
-score home team
-score away team
-date and time
-how many days of rest for home team
-how many days of rest for away team
-Pace = number of possessions per game
-Efficiency = points / possessions
+### Game Collection
 
+|Field|
+|-----|
+Home team |
+Away team |
+overtime |
+score home team |
+score away team |
+date and time |
+how many days of rest for home team |
+how many days of rest for away team |
+Pace = number of possessions per game |
+Efficiency = points / possessions |
 
-Equipe Collection
------------------
-conference
-division
-number of wins
-number of losses
-rank in conference
-rank in division
-- effective field goal percentage
-- Free throw attempt rate
-- turnover ratio
-- offensive rebound percentage
+### Team Collection
 
-## Ideas
-There's a difference between the data you can get after the game (the 4 factors),
-and the data you have before the game.
-thanks to the stats after the game, you can update your ELO-based model.
+|Field|
+|-----|
+conference |
+division |
+number of wins |
+number of losses |
+rank in conference |
+rank in division |
+effective field goal percentage |
+Free throw attempt rate |
+turnover ratio |
+offensive rebound percentage |
 
-pourquoi pas utiliser une chaine de markov pour prédire la prochaine win?
-les etats sont les places au classement: on prend une équipe et on regarde quelles est la proba pour cette equipe de rester à ce classement ou bien de bouger
+## Next steps
+
+- Elo-based model
+- markov chain to predict next rank of the team
+- trueskills
