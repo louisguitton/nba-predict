@@ -11,6 +11,7 @@ mongoose.connection.once('connected', function() {
 	console.log("Database connected successfully")
 	cleanUpOdds();
 	console.log("Odds clean...")
+	mongoose.connection.close()
 });
 
 

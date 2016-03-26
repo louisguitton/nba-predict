@@ -19,8 +19,8 @@ var gameSchema = new Schema({
 	odd_home : Number,
 	overtime : Boolean,
 	score_home : Number,
-	rest_time_home : Date,
-	rest_time_away : Date,
+	rest_time_home : Number,
+	rest_time_away : Number,
 });
 
 // methods ======================
