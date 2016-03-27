@@ -5,20 +5,33 @@ var db = mongoose.connect('mongodb://localhost/nba');
 
 var teams = require('./data/teams.json');
 
-for (var t in teams){
-	var name = teams[t].name;
-	var query = {$or:[{home_team : name },{away_team : name}]};
-	var games = Game.find(query);
-	games = games.sort({date_time:-1});
-	games = games.select('home_team away_team date_time');
-	games = games.exec('find',
-		//callback
-		function(err, games){
-			if (err) return console.log(err);
-			console.log(teams[t].name + " -> " + games.length)
-		}
-	);
+var t = 0;
+
+function loop(){
+	if (t < teams.length){
+		var name = teams[t].name;
+		var query = {$or:[{home_team : name },{away_team : name}]};
+		console.log(t + " " + name);
+		var games = Game.find(query);
+		games = games.sort({date_time:-1});
+		games = games.select('home_team away_team date_time');
+		games = games.exec('find',
+			//callback
+			function(err, games){
+				if (err) return console.log(err);
+				console.log(games[0]);
+				console.log(t + " -> " + games.length)
+				t ++;
+				loop();
+			}
+		);
+	}
 }
+
+loop();
+
+// for (var t = 0; t < teams.length; t++){
+
 
 // problem with the for each asynchronous node
 
