@@ -6,3 +6,5 @@ odd_away
 score_home
 score_away
 overtime
+rest_time_home
+rest_time_away
