@@ -6,8 +6,9 @@ var db = mongoose.connect('mongodb://localhost/nba');
 var teams = require('./data/teams.json');
 
 var t = 0;
+var id_games = 0;
 
-function loop(){
+function loop_on_teams(){
 	if (t < teams.length){
 		var name = teams[t].name;
 		var query = {$or:[{home_team : name },{away_team : name}]};
@@ -21,55 +22,38 @@ function loop(){
 				if (err) return console.log(err);
 				// console.log(games[0]);
 				console.log(name + " -> " + games.length)
+
+				loop_on_games(name, games);
+
 				t ++;
-				loop();
+
+				id_games = 0;
+				loop_on_teams();
 			}
 		);
 	}
 }
 
-loop();
+function loop_on_games(team_name, games_array){
+	if (id_games < games_array.length - 1){
+		var delta = games_array[id_games].date_time - games_array[id_games + 1].date_time; // already in mms
+		if (games_array[id_games].home_team == team_name){
+			games_array[id_games].rest_time_home = delta;
+			games_array[id_games].save();
+			console.log("delta saved for home team");
+			id_games ++;
+			loop_on_games(team_name, games_array);
+		} else if (games_array[id_games].away_team == team_name){
+			games_array[id_games].rest_time_away = delta;
+			games_array[id_games].save();
+			console.log("delta saved for away team");
+			id_games ++;
+			loop_on_games(team_name, games_array);
+		}
+	}
+}
 
-// for (var t = 0; t < teams.length; t++){
 
-
-// problem with the for each asynchronous node
+loop_on_teams();
 
 // mongoose.connection.close()
-
-
-// handleError = (err) ->
-//   console.log "Got an error", err
-// mongoose.connection.once('connected', function() {
-// 	console.log("Database connected successfully")
-//   console.log("Computing restDays")
-// 	restDays();
-// 	// mongoose.connection.close()
-// });
-
-// var restDays = function(){
-// var counter_games = 0;
-/*
-games.exec(function(err,gamesOfTeam){
-if (err) return handleError(err);
-console.log(gamesOfTeam[0]);
-for(var i=0;i<gamesOfTeam.length-1;i++){
-var delta = gamesOfTeam[i].date_time-gamesOfTeam[i+1].date_time;// already in mms
-if(gamesOfTeam[i].home_team==name){
-gamesOfTeam[i].rest_time_home = delta;
-gamesOfTeam[i].save();
-console.log("delta saved for home team")
-// counter_games ++;
-} else if (gamesOfTeam[i].away_team==name) {
-gamesOfTeam[i].rest_time_away = delta;
-gamesOfTeam[i].save();
-console.log("delta saved for away team")
-// counter_games ++;
-}
-}
-})
-*/
-
-
-// console.log(counter_games + " games modified...")
-// }
