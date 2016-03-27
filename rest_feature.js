@@ -19,8 +19,8 @@ function loop(){
 			//callback
 			function(err, games){
 				if (err) return console.log(err);
-				console.log(games[0]);
-				console.log(t + " -> " + games.length)
+				// console.log(games[0]);
+				console.log(name + " -> " + games.length)
 				t ++;
 				loop();
 			}
