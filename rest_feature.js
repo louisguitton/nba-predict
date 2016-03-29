@@ -35,6 +35,8 @@ function loop_on_teams(){
 function loop_on_games(team_name, games_array){
 	if (g < games_array.length - 1){
 		var delta = games_array[g].date_time - games_array[g + 1].date_time; // already in mms
+		mms_in_a_day = 24 * 60 * 60 * 1000;
+		delta = delta / mms_in_a_day; // in days
 		if (games_array[g].home_team == team_name){
 			games_array[g].rest_time_home = delta;
 		} else if (games_array[g].away_team == team_name){
