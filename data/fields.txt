@@ -8,3 +8,7 @@ score_away
 overtime
 rest_time_home
 rest_time_away
+odd_point_home
+odd_point_away
+odd_prim_home
+odd_prim_away

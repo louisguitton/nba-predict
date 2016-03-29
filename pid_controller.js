@@ -52,8 +52,8 @@ function loop_on_games(team_name, games_array){
         games_array[g].odd_prim_away = 0.5 * games_array[g].rest_time_away * (games_array[g].odd_away + games_array[g+1].odd_array);
       }
     }
-    console.log(games_array[g]);
-    // games_array[g].save();
+    // console.log(games_array[g]);
+    games_array[g].save();
     console.log("Looped realised for game " + g);
     g ++;
     loop_on_games(team_name, games_array);

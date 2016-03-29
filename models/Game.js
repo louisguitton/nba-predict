@@ -21,6 +21,10 @@ var gameSchema = new Schema({
 	score_home : Number,
 	rest_time_home : Number,
 	rest_time_away : Number,
+	odd_point_home : Number,
+	odd_point_away : Number,
+	odd_prim_home : Number,
+	odd_prim_away : Number,
 });
 
 // methods ======================
