@@ -5,18 +5,18 @@ var db = mongoose.connect('mongodb://localhost/nba');
 
 var teams = require('./data/teams.json');
 
-var t = 0;
-var id_games = 0;
+var t = 0;// t like team
+var g = 0;// g like game
 
 function loop_on_teams(){
 	if (t < teams.length){
 		var name = teams[t].name;
-		var query = {$or:[{home_team : name },{away_team : name}]};
+		var q = {$or:[{home_team : name },{away_team : name}]};
 		console.log(t + " " + name);
-		var games = Game.find(query);
-		games = games.sort({date_time:-1});
-		games = games.select('home_team away_team date_time');
-		games = games.exec('find',
+		var query = Game.find(q);
+		query.sort({date_time:-1});
+		query.select('home_team away_team date_time');
+		query.exec('find',
 			//callback
 			function(err, games){
 				if (err) return console.log(err);
@@ -25,8 +25,7 @@ function loop_on_teams(){
 				loop_on_games(name, games);
 
 				t ++;
-
-				id_games = 0;
+				g = 0;
 				loop_on_teams();
 			}
 		);
@@ -34,21 +33,17 @@ function loop_on_teams(){
 }
 
 function loop_on_games(team_name, games_array){
-	if (id_games < games_array.length - 1){
-		var delta = games_array[id_games].date_time - games_array[id_games + 1].date_time; // already in mms
-		if (games_array[id_games].home_team == team_name){
-			games_array[id_games].rest_time_home = delta;
-			games_array[id_games].save();
-			console.log("delta saved for home team");
-			id_games ++;
-			loop_on_games(team_name, games_array);
-		} else if (games_array[id_games].away_team == team_name){
-			games_array[id_games].rest_time_away = delta;
-			games_array[id_games].save();
-			console.log("delta saved for away team");
-			id_games ++;
-			loop_on_games(team_name, games_array);
+	if (g < games_array.length - 1){
+		var delta = games_array[g].date_time - games_array[g + 1].date_time; // already in mms
+		if (games_array[g].home_team == team_name){
+			games_array[g].rest_time_home = delta;
+		} else if (games_array[g].away_team == team_name){
+			games_array[g].rest_time_away = delta;
 		}
+		games_array[g].save();
+		console.log("delta saved for home team");
+		g ++;
+		loop_on_games(team_name, games_array);
 	}
 }
 

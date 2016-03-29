@@ -24,7 +24,7 @@ function loop_on_teams(){
       query.exec(function(err, games){
         console.log(games.length)
 
-        loop_on_games(games);
+        loop_on_games(name, games);
 
         t ++;
         g = 0;
@@ -33,13 +33,15 @@ function loop_on_teams(){
     }
 }
 
-function loop_on_games(games_array){
+function loop_on_games(team_name, games_array){
   if (g < games_array.length){
-    games_array[g].odd_point_home = ;
-    games_array[g].odd_point_away = ;
-    games_array[g].odd_prim_home = ;
-    games_array[g].odd_prim_away = ;
-
+    if (games_array[g].home_team == team_name){
+      games_array[g].odd_point_home = ;
+      games_array[g].odd_prim_home = ;
+    } else if (games_array[g].away_team == team_name){
+      games_array[g].odd_point_away = ;
+      games_array[g].odd_prim_away = ;
+    }
 
     games_array[g].save();
     console.log("Looped realised for game " + g);
@@ -52,12 +54,6 @@ function loop_on_games(games_array){
 loop_on_teams();
 
 /*
-The idea here is to take each game and generate four features:
-- odd_point_home,
-- odd_point_away,
-- odd_prim_home,
-- odd_prim_away
-
 ODD_POINT:
 Euler method: odd_point_home[i] = odd_home[i] - odd_????[i+1]/rest_time_home
 
