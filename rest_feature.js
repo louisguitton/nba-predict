@@ -20,7 +20,6 @@ function loop_on_teams(){
 			//callback
 			function(err, games){
 				if (err) return console.log(err);
-				// console.log(games[0]);
 				console.log(name + " -> " + games.length)
 
 				loop_on_games(name, games);
